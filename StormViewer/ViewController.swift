@@ -19,16 +19,12 @@ class ViewController: UITableViewController {
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShareButton))
 
-		let fm = FileManager.default
-		guard let path = Bundle.main.resourcePath,
-			  let items = try? fm.contentsOfDirectory(atPath: path) else { return }
+		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+			let fm = FileManager.default
+			guard let path = Bundle.main.resourcePath, let items = try? fm.contentsOfDirectory(atPath: path) else { return }
 
-		for item in items {
-			if item.hasPrefix("nssl") {
-				picturesPaths.append(item)
-			}
+			self?.picturesPaths = items.filter { $0.hasPrefix("nssl") }.sorted()
 		}
-		picturesPaths.sort()
 	}
 
 	// MARK: - Selectors

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UICollectionViewController {
 
 	private var picturesPaths: [String] = []
 
@@ -24,6 +24,9 @@ class ViewController: UITableViewController {
 			guard let path = Bundle.main.resourcePath, let items = try? fm.contentsOfDirectory(atPath: path) else { return }
 
 			self?.picturesPaths = items.filter { $0.hasPrefix("nssl") }.sorted()
+			DispatchQueue.main.async {
+				self?.collectionView.reloadData()
+			}
 		}
 	}
 
@@ -33,23 +36,31 @@ class ViewController: UITableViewController {
 		activityController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
 		present(activityController, animated: true)
 	}
+}
 
-	// MARK: - UITableViewDataSource
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+// MARK: - UICollectionViewDataSource
+extension ViewController {
+
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		picturesPaths.count
 	}
 
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-		cell.textLabel?.text = picturesPaths[indexPath.row]
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Picture", for: indexPath) as? PictureCell else {
+			return UICollectionViewCell()
+		}
+		cell.nameLabel.text = picturesPaths[indexPath.item]
 		return cell
 	}
+}
 
-	// MARK: - UITableViewDelegate
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+// MARK: - UICollectionViewDelegate
+extension ViewController {
+
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		guard let detailViewController = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController else { return }
-		detailViewController.selectedImage = picturesPaths[indexPath.row]
-		detailViewController.title = "Picture \(indexPath.row + 1) of \(picturesPaths.count)"
-		navigationController?.pushViewController(detailViewController, animated: true)
+		detailViewController.selectedImage = picturesPaths[indexPath.item]
+		detailViewController.title = "Picture \(indexPath.item + 1) of \(picturesPaths.count)"
+		navigationController?.pushViewController(detailViewController, animated: UIView.areAnimationsEnabled)
 	}
 }

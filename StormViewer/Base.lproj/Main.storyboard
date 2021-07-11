@@ -25,29 +25,39 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Picture" id="ror-cb-0tJ" customClass="PictureCell" customModule="StormViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="196" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="196" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="sF6-h1-V1E">
-                                    <rect key="frame" x="0.0" y="0.0" width="196" height="64"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="196" height="77"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ES8-xe-0yN">
-                                            <rect key="frame" x="8" y="16" width="180" height="32"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="8" y="16" width="180" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Times viewed: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTN-1l-JIR">
+                                            <rect key="frame" x="16" y="44" width="164" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="sTN-1l-JIR" firstAttribute="leading" secondItem="sF6-h1-V1E" secondAttribute="leading" constant="16" id="5Eg-pX-ovH"/>
+                                        <constraint firstItem="sTN-1l-JIR" firstAttribute="top" secondItem="ES8-xe-0yN" secondAttribute="bottom" constant="8" id="8uE-4M-6xS"/>
+                                        <constraint firstAttribute="bottom" secondItem="sTN-1l-JIR" secondAttribute="bottom" constant="16" id="CbX-cP-NQv"/>
                                         <constraint firstItem="ES8-xe-0yN" firstAttribute="leading" secondItem="sF6-h1-V1E" secondAttribute="leading" constant="8" id="JEF-Yj-5VZ"/>
                                         <constraint firstAttribute="trailing" secondItem="ES8-xe-0yN" secondAttribute="trailing" constant="8" id="dDt-5F-aki"/>
+                                        <constraint firstAttribute="trailing" secondItem="sTN-1l-JIR" secondAttribute="trailing" constant="16" id="e1W-pF-zuD"/>
                                         <constraint firstItem="ES8-xe-0yN" firstAttribute="top" secondItem="sF6-h1-V1E" secondAttribute="top" constant="16" id="wJN-qc-LWf"/>
-                                        <constraint firstAttribute="bottom" secondItem="ES8-xe-0yN" secondAttribute="bottom" constant="16" id="wbf-Fs-B4p"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <size key="customSize" width="196" height="64"/>
+                                <size key="customSize" width="196" height="77"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="ES8-xe-0yN" id="wtR-jz-guq"/>
+                                    <outlet property="timesViewedLabel" destination="sTN-1l-JIR" id="7PO-Wm-14D"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -111,6 +121,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

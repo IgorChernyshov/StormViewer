@@ -49,7 +49,12 @@ extension ViewController {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Picture", for: indexPath) as? PictureCell else {
 			return UICollectionViewCell()
 		}
-		cell.nameLabel.text = picturesPaths[indexPath.item]
+		let pictureName = picturesPaths[indexPath.item]
+		cell.nameLabel.text = pictureName
+
+		let timesViewed = UserDefaults.standard.integer(forKey: pictureName)
+		cell.timesViewedLabel.text = "Times viewed: \(timesViewed)"
+
 		return cell
 	}
 }
@@ -59,7 +64,13 @@ extension ViewController {
 
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		guard let detailViewController = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController else { return }
-		detailViewController.selectedImage = picturesPaths[indexPath.item]
+		let pictureName = picturesPaths[indexPath.item]
+
+		let timesViewed = UserDefaults.standard.integer(forKey: pictureName)
+		UserDefaults.standard.set(timesViewed + 1, forKey: pictureName)
+		collectionView.reloadItems(at: [indexPath])
+
+		detailViewController.selectedImage = pictureName
 		detailViewController.title = "Picture \(indexPath.item + 1) of \(picturesPaths.count)"
 		navigationController?.pushViewController(detailViewController, animated: UIView.areAnimationsEnabled)
 	}

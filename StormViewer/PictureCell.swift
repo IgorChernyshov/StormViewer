@@ -9,4 +9,5 @@ import UIKit
 
 final class PictureCell: UICollectionViewCell {
 	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var timesViewedLabel: UILabel!
 }

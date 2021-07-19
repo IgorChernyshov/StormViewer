@@ -19,6 +19,7 @@ final class DetailViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
+		assert(selectedImage != nil, "Selected image must not be nil")
 		navigationItem.largeTitleDisplayMode = .never
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
 
